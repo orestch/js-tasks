@@ -1,4 +1,7 @@
-const browsers = [
+/**
+ * Browsers and corresponding RegExps list
+ */
+var browsers = [
   {
     name: 'Edge',
     regexp: /Edge\/([0-9\._]+)/
@@ -37,10 +40,22 @@ const browsers = [
   }
 ];
 
+/**
+ * Detects browser based on userAgent information with the help of RegExp
+ * @param {String} userAgent
+ * @returns {String} Browser name
+ */
 function detectBrowser(userAgent) {
   if (!userAgent) return null;
 
-  return browsers.filter(browser => browser.regexp.test(userAgent)).shift().name;
+  try {
+      return browsers.filter(function(browser) {
+        return browser.regexp.test(userAgent);
+      }).shift().name;
+  } catch(e) {
+      return 'not detected';
+  }
 }
 
-console.log('Your browser is', detectBrowser(navigator.userAgent));
+// Test it
+alert('Your browser is ' + detectBrowser(navigator.userAgent));

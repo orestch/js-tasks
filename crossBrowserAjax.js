@@ -1,3 +1,11 @@
+/**
+ * Creates cross-browser xhr request object and sends request to the given url
+ * @param {String} url
+ * @param {String} method
+ * @param {Object} callback
+ * @param {Boolean} async
+ * @param {Mixed} data
+ */
 function ajax(url, method, callback, async, data) {
   try {
     let xmlHttp = new(XMLHttpRequest || ActiveXObject)('MSXML2.XMLHTTP.3.0');
@@ -17,8 +25,12 @@ function ajax(url, method, callback, async, data) {
   }
 }
 
+/**
+ * Callback function
+*/
 function displayData(data) {
   console.log(data);
 }
 
+// Test it
 ajax('https://api.nasa.gov/planetary/apod?api_key=NNKOjkoul8n1CH18TWA9gwngW1s1SmjESPjNoUFo', 'GET', displayData, true);

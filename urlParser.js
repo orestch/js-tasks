@@ -1,11 +1,16 @@
-function parseUrl(urlString) {
-  let url = urlString || window.location.href,
-    parsedUrl = urlString.match(/:\/\/(?:www\.)?(.[^/]+)(.*)/i),
+/**
+ * Parses URL into hostname and params
+ * @param {String} url
+ * @returns {Object} Parsed URL
+ */
+function parseUrl(url) {
+  var url = url || window.location.href,
+    parsedUrl = url.match(/:\/\/(?:www\.)?(.[^/]+)(.*)/i),
     params = parsedUrl[2] || null,
     paramsObj = {};
 
-  params.match(/\w+=\w+/g).forEach(paramString => {
-    let splittedParam = paramString.split('=');
+  params.match(/\w+=\w+/g).forEach(function(paramString) {
+    var splittedParam = paramString.split('=');
 
     return paramsObj[splittedParam[0]] = splittedParam[1];
   });
@@ -16,4 +21,5 @@ function parseUrl(urlString) {
   };
 }
 
-console.log(parseUrl('https://www.google.com/dir/1/2/search.html?city=lviv&age=1&name=test'));
+// Test it
+console.log(JSON.stringify(parseUrl('https://www.google.com/dir/1/2/search.html?city=lviv&age=1&name=test')));
